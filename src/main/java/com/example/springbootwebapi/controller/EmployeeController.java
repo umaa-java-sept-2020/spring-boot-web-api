@@ -47,4 +47,10 @@ public class EmployeeController {
         e.setUid(uid);
         return employeeRepository.updateFirstName(e);
     }
+
+    @DeleteMapping("/employees/{uuid}") // uuid is your resource identifier.
+    public int deleteEmployeeByUid(@PathVariable("uuid") String uid) {
+        return employeeRepository.delete(uid);
+    }
+
 }
