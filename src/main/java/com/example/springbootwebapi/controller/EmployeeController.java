@@ -36,10 +36,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/")
-    public Employee saveEmployee(@RequestBody Employee e)
-    {
-       String uid = UUID.randomUUID().toString();
-       e.setUid(uid);
-       return employeeRepository.insert(e);
+    public Employee saveEmployee(@RequestBody Employee e) {
+        String uid = UUID.randomUUID().toString();
+        e.setUid(uid);
+        return employeeRepository.insert(e);
+    }
+
+    @PutMapping("/employees/{uuid}")
+    public Employee updateEmployee(@RequestBody Employee e, @PathVariable("uuid") String uid) {
+        e.setUid(uid);
+        return employeeRepository.updateFirstName(e);
     }
 }

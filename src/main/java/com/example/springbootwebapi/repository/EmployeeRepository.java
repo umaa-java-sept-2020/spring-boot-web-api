@@ -32,7 +32,7 @@ public class EmployeeRepository {
         System.out.println("rows deleted: " + rows);
         return rows;
     }
-    public Employee update(Employee e)
+    public Employee updateFirstName(Employee e)
     {
         Object[] args = new Object[]{ e.getFirstName(), e.getUid()};
         int rows = jdbcTemplate.update(UPDATE_FIRST_NAME, args);
