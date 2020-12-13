@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -14,22 +15,25 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @GetMapping("/employees/hello")
-    public String saySomething()
-    {
+    public String saySomething() {
         return "I am learning spring boot";
     }
 
     @GetMapping("/employees/defaultEmployee")
-    public Employee getDefaultEmployee()
-    {
-        Employee e = new Employee(1, UUID.randomUUID().toString(), "john","doe");
+    public Employee getDefaultEmployee() {
+        Employee e = new Employee(1, UUID.randomUUID().toString(), "john", "doe");
         return e;
     }
 
-    @GetMapping("/employees/{uuid}")
-    public Employee getEmployeeByUid(@PathVariable("uuid") String uid)
-    {
+    @GetMapping("/employees/{uuid}") // uuid is your resource identifier.
+    public Employee getEmployeeByUid(@PathVariable("uuid") String uid) {
         return employeeRepository.selectByUid(uid);
+    }
+
+    @GetMapping("/employees/")
+    public List<Employee> getAllEmployeeList() {
+        return employeeRepository.selectAll();
     }
 }
